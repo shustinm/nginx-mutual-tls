@@ -5,7 +5,7 @@ services:
     ports:
       - "443:443"
     environment:
-      - ALLOWED_CLIENT_S_DN='CN=example.com,O=Example Inc,L=Toronto,ST=Ontario,C=CA'
+      - ALLOWED_CLIENT_S_DN='/C=IL/ST=Israel/O=Company'
     volumes:
       - type: bind
         source: certs

@@ -7,7 +7,7 @@ This image contains an NGINX server configured with Mutual TLS which will allow 
 1. Put your certs in `./certs/`:
 * `server.crt` and `server.key` - server certificate and key used for server authentication
 * `ca.crt` - trusted root CA your server will allow client certificates signed by
-2. Set the environment variables:
+2. Edit the environment variables and ports in the `docker-compose.yml` file:
 * `LISTEN_ADDR` - address for NGINX to listen on, default is `443`
 * `ALLOWED_CLIENT_S_DN` - allowed client certificate subject domain name, client certificates from other domains will result in a `403`
 * `VERIFY_DEPTH` - maximum client certificate verify depth, defaults to `1` which will allow client certificates signed by one intermediate CA, set to `0` to only allow client certificates signed by the trusted root CA

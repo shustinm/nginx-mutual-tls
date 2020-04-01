@@ -8,12 +8,13 @@ This image contains an NGINX server configured with Mutual TLS which will allow 
 * `server.crt` and `server.key` - server certificate and key used for server authentication
 * `ca.crt` - trusted root CA your server will allow client certificates signed by
 2. Set the environment variables:
+* `LISTEN_ADDR` - address for NGINX to listen on, default is `443`
 * `ALLOWED_CLIENT_S_DN` - allowed client certificate subject domain name, client certificates from other domains will result in a `403`
-* `VERIFY_DEPTH` (optional) - maximum client certificate verify depth, defaults to `1` which will allow client certificates signed by one intermediate CA, set to `0` to only allow client certificates signed by the trusted root CA
-* `FW_ADDR` (optional) - An address where the proxied server is listening, defaults to `localhost:8123` 
+* `VERIFY_DEPTH` - maximum client certificate verify depth, defaults to `1` which will allow client certificates signed by one intermediate CA, set to `0` to only allow client certificates signed by the trusted root CA
+* `FW_ADDR` - An address where the proxied server is listening, defaults to `localhost:8123` 
 3. Run it:
 ```
-docker run -p 443:443 --env ALLOWED_CLIENT_S_DN='CN=example.com,O=Example Inc,L=Toronto,ST=Ontario,C=CA' -v `pwd`/certs/:/etc/nginx/conf.d/certs mviveros/nginx-mutual-tls
+docker-compose up
 ```
 
 ## Test

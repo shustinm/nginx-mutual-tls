@@ -1,9 +1,10 @@
-FROM nginx:1.17.1
+FROM nginx
 
 EXPOSE 443
 
 COPY default.conf /etc/nginx/conf.d/
 
+ENV LISTEN_ADDR '443'
 ENV VERIFY_DEPTH 1
 ENV ALLOWED_CLIENT_S_DN 'CN=dunder-mifflin.com,O=Dunder Mifflin Inc,L=Scranton,ST=Pennsylvania,C=US'
 ENV FW_ADDR 'localhost:8123'

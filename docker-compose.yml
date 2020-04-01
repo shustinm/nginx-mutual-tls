@@ -1,0 +1,12 @@
+version: '3'
+services:
+  nginx:
+    build: .
+    ports:
+      - "443:443"
+    environment:
+      - ALLOWED_CLIENT_S_DN='CN=example.com,O=Example Inc,L=Toronto,ST=Ontario,C=CA'
+    volumes:
+      - type: bind
+        source: certs
+        target: /etc/nginx/conf.d/certs

@@ -1,11 +1,16 @@
 FROM nginx
 
-EXPOSE 443
+ENV LISTEN_ADDR='443'
+ENV VERIFY_DEPTH=1
+ENV ALLOWED_CLIENT_S_DN='/C=IL/ST=Israel/O=Company'
+ENV FW_ADDR='localhost:8123'
+ENV NGINX_CA='on'
+ENV NGINX_DN='on'
 
-COPY nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
 
-ENV LISTEN_ADDR '443'
-ENV VERIFY_DEPTH 1
-ENV ALLOWED_CLIENT_S_DN 'CN=shust.in,O=Shustin Software Solutions,L=Scranton,ST=Israel,C=IL'
-ENV FW_ADDR 'localhost:8123'
-CMD envsubst '${LISTEN_ADDR} ${VERIFY_DEPTH} ${ALLOWED_CLIENT_S_DN} ${FW_ADDR}' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'
+COPY docker-entrypoint.sh /usr/local/bin
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD nginx -g 'daemon off;'

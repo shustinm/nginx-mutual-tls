@@ -7,6 +7,4 @@ services:
     environment:
       - ALLOWED_CLIENT_S_DN='/C=IL/ST=Israel/O=Company'
     volumes:
-      - type: bind
-        source: certs
-        target: /etc/nginx/conf.d/certs
+      - "./certs:/etc/nginx/conf.d/certs"
